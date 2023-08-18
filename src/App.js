@@ -4,16 +4,17 @@ import Status from "./components/Status";
 import axios from "axios";
 import Users from "./components/Users";
 import Priority from "./components/Priority";
+import "./App.css"
 
 function App() {
   const [tickets, setTickets] = useState([]);
+  const [users, setUsers] = useState([]);
   const [grouping, setGrouping] = useState(
     JSON.parse(localStorage.getItem("group"))
   );
   const [ordering, setOrdering] = useState(
     JSON.parse(localStorage.getItem("order"))
   );
-  const [users, setUsers] = useState([]);
   const getTickets = async () => {
     try {
       const res = await axios.get(
@@ -58,7 +59,7 @@ function App() {
         <></>
       )}
       {grouping === "Users" ? <Users tickets={tickets} users={users} /> : <></>}
-      {grouping === "Priority" ? <Priority tickets={tickets} /> : <></>}
+      {grouping === "Priority" ? <Priority tickets={tickets} grouping={grouping} /> : <></>}
     </div>
   );
 }
